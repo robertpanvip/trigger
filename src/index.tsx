@@ -10,7 +10,7 @@ import useLayoutEffect from 'rc-util/lib/hooks/useLayoutEffect';
 import isMobile from 'rc-util/lib/isMobile';
 import * as React from 'react';
 import Popup from './Popup';
-import TriggerWrapper from './TriggerWrapper';
+import Ref from './Ref';
 import type { TriggerContextProps } from './context';
 import TriggerContext from './context';
 import useAction from './hooks/useAction';
@@ -698,9 +698,11 @@ export function generateTrigger(
           ref={setTargetRef}
           onResize={onTargetResize}
         >
-          <TriggerWrapper getTriggerDOMNode={getTriggerDOMNode}>
+          <Ref ref={(node)=>{
+              getTriggerDOMNode(node)
+          }>
             {triggerNode}
-          </TriggerWrapper>
+          </Ref>
         </ResizeObserver>
         <TriggerContext.Provider value={context}>
           <Popup
